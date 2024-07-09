@@ -1,5 +1,5 @@
 {
-  "name": "web",
+  "name": "docs",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,15 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@repo/db": "*",
     "@repo/ui": "*",
+    "bcrypt": "^5.1.1",
     "next": "15.0.0-rc.0",
+    "next-auth": "^4.24.7",
     "react": "19.0.0-rc-f994737d14-20240522",
     "react-dom": "19.0.0-rc-f994737d14-20240522",
-    "@repo/db": "*"
+    "recoil": "^0.7.7"
   },
   "devDependencies": {
+    "@repo/db": "*",
     "@repo/eslint-config": "*",
     "@repo/typescript-config": "*",
+    "@types/bcrypt": "^5.0.2",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
