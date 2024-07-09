@@ -39,7 +39,7 @@ export const authOptions = {
                         password: hashedPassword
                     }
                 });
-            
+                //you should sent an opt to the users
                 return {
                     id: user.id.toString(),
                     name: user.name,
