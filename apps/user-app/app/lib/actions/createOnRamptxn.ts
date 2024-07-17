@@ -1,35 +1,33 @@
-"use server"
+"use server";
 
+import prisma from "@repo/db/client";
 import { getServerSession } from "next-auth";
 import { authOptions } from "../auth";
-import prisma from "@repo/db/client";
-
 
 export async function createOnRampTransaction(
-  amount: number,
-  provider: string
+  provider: string,
+  amount: number
 ) {
+  // Ideally the token should come from the banking provider (hdfc/axis)
   const session = await getServerSession(authOptions);
-  const token = Math.random().toString();
-  const userId = session.user.id;
-
-  if (!userId) {
+  if (!session?.user || !session.user?.id) {
     return {
-      message: "User not logged In",
+      message: "Unauthenticated request",
     };
   }
+  const token = (Math.random() * 1000).toString();
   await prisma.onRampTransaction.create({
     data: {
-      userId,
-      amount: amount,
+      provider,
       status: "Processing",
       startTime: new Date(),
-      provider,
       token: token,
+      userId: Number(session?.user?.id),
+      amount: amount * 100,
     },
   });
 
   return {
-    message: "On ramp transaction added",
+    message: "Done",
   };
 }
